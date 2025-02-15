@@ -1,13 +1,139 @@
-body {
+/* src/index.css */
+
+/* Reset some defaults */
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Set body background and font */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f2f5;
+  color: #333;
+  overflow: hidden;
+}
+
+/* Main container fills the full screen */
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Sidebar (File Explorer tree) */
+.sidebar {
+  width: 50%;
+  background: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  padding: 20px;
+  overflow-y: auto;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Sidebar header */
+.sidebar h3 {
+  font-size: 1.5rem;
+  color: #0011ff;
+  margin-bottom: 20px;
+}
+
+/* Sidebar buttons */
+.sidebar button {
+  background-color: #0000ff;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+  margin: 10px;
+}
+
+.sidebar button:hover {
+  background-color: #0056b3;
+}
+
+/* File tree list styles */
+.file-tree {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/* Each file/folder node */
+.node {
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.node:hover {
+  background-color: #f5f5f5;
+}
+
+/* Icon and name spacing */
+.node span {
+  margin-right: 8px;
+}
+
+/* Action buttons inside a node */
+.node .actions {
+  margin-left: auto;
+  display: flex;
+  gap: 4px;
+}
+
+.node .actions button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.node .actions button:hover {
+  color: #007bff;
+}
+
+/* Nested file tree indentation */
+.file-tree ul {
+  padding-left: 20px;
+}
+
+/* Content area styles */
+.content {
+  flex: 1;
+  background: #fafafa;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+/* File Viewer styling */
+.file-viewer {
+  background: #fff;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.file-viewer h3 {
+  font-size: 1.4rem;
+  color: #007bff;
+  margin-bottom: 15px;
+}
+
+.file-viewer pre {
+  background-color: #f1f1f1;
+  padding: 15px;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: Consolas, 'Courier New', monospace;
 }
