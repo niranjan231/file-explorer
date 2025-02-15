@@ -1,15 +1,22 @@
-// src/App.js
-import React from "react";
-import FileExplorer from "./components/FileExplorer";
-import { Provider } from "react-redux";
-import { store } from "./redux/store";
-// import "../src/index.css";
+import { useSelector } from "react-redux";
+// import "./App.css";
+import { Routes, Route } from "react-router-dom";
+// import User from "./Componet/User";
+import FieExplorer from "./components/FileExplorer";
+import FileViewer from "./components/FileViewer";
+
 
 function App() {
+
+
+
   return (
-    <Provider store={store}>
-      <FileExplorer />
-    </Provider>
+    <div>
+      <FileViewer/>
+      <Routes>
+        <Route path="/filexplorer" element={<FieExplorer />} />
+      </Routes>
+    </div>
   );
 }
 

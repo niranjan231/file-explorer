@@ -1,90 +1,69 @@
-// src/components/FileExplorer.js
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import FileTree from "./FileTree";
-import FileViewer from "./FileViewer";
-import { addItem, renameItem, deleteItem } from "../redux/fileSlice";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { addUser, editUser } from "../redux/counterSlice";
+import "../App.css";
 
-const FileExplorer = () => {
-  const fileSystem = useSelector((state) => state.files.fileSystem);
-  const dispatch = useDispatch();
-  const [selectedFile, setSelectedFile] = useState(null);
+const FieExplorer = ({ onClose, editingUser }) => {
+    const [user, setUser] = useState({ name: "", email: "", title: "" });
+    const dispatch = useDispatch();
 
-  const handleSelectFile = (file) => {
-    if (file.type === "file") setSelectedFile(file);
-  };
+    useEffect(() => {
+        if (editingUser) {
+            setUser(editingUser);
+        }
+    }, [editingUser]);
 
-  const handleCreateFolder = (parentId) => {
-    const folderName = prompt("Enter folder name:");
-    if (!folderName) return;
-    const newFolder = {
-      id: Date.now(),
-      name: folderName,
-      type: "folder",
-      children: [],
+    const handleChange = (e) => {
+        setUser({ ...user, [e.target.name]: e.target.value });
     };
-    dispatch(addItem({ parentId, newItem: newFolder }));
-  };
 
-  const handleCreateFile = (parentId) => {
-    const fileName = prompt("Enter file name:");
-    if (!fileName) return;
-    const content = prompt("Enter file content:") || "";
-    const newFile = {
-      id: Date.now(),
-      name: fileName,
-      type: "file",
-      content,
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (user.name && user.email && user.title) {
+            if (editingUser) {
+                dispatch(editUser(user));
+            } else {
+                dispatch(addUser(user));
+            }
+            setUser({ name: "", email: "", title: "" });
+            onClose();
+        }
     };
-    dispatch(addItem({ parentId, newItem: newFile }));
-  };
 
-  const handleRename = (itemId) => {
-    const newName = prompt("Enter new name:");
-    if (!newName) return;
-    dispatch(renameItem({ itemId, newName }));
-  };
-
-  const handleDelete = (itemId) => {
-    const confirmed = window.confirm("Are you sure you want to delete this item?");
-    if (!confirmed) return;
-    dispatch(deleteItem(itemId));
-    if (selectedFile && selectedFile.id === itemId) {
-      setSelectedFile(null);
-    }
-  };
-
-  return (
-    <div className="app-container">
-      {/* Sidebar: File Tree */}
-      <div className="sidebar">
-        <h3>File Explorer</h3>
-        <div style={{ marginBottom: "20px" }}>
-          <button onClick={() => handleCreateFolder(null)}>New Folder (Root)</button>
-          <button onClick={() => handleCreateFile(null)}>New File (Root)</button>
+    return (
+        <div className="add-user">
+            <h2>{editingUser ? "Edit Post" : "Add New Post"}</h2>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    name="name"
+                    value={user.name}
+                    onChange={handleChange}
+                    placeholder="Enter Name"
+                    required
+                />
+                <input
+                    type="email"
+                    name="email"
+                    value={user.email}
+                    onChange={handleChange}
+                    placeholder="Enter Email"
+                    required
+                />
+                <input
+                    type="text"
+                    name="title"
+                    value={user.title}
+                    onChange={handleChange}
+                    placeholder="Enter Title"
+                    required
+                />
+                <button type="submit" className="add-btn">
+                    {editingUser ? "Update User" : "Add User"}
+                </button>
+            </form>
         </div>
-        <FileTree
-          nodes={fileSystem}
-          onSelectFile={handleSelectFile}
-          onCreateFolder={handleCreateFolder}
-          onCreateFile={handleCreateFile}
-          onRename={handleRename}
-          onDelete={handleDelete}
-        />
-      </div>
-
-      {/* Content Area: File Viewer */}
-      <div className="content">
-        {selectedFile ? (
-          <FileViewer file={selectedFile} />
-        ) : (
-          <div style={{ fontSize: "1.2rem", color: "#777" }}>
-            Select a file from the sidebar to view its content.
-          </div>
-        )}
-      </div>
-    </div>
-  );
+    );
 };
 
-export default FileExplorer;
+export default FieExplorer;
