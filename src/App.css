@@ -10,6 +10,103 @@
     overflow-x: auto;
     padding: 20px;
   }
+  /* Light mode styles */
+.light-mode {
+  background-color: #fff;
+  color: #000;
+}
+
+/* Dark mode styles */
+.dark-mode {
+  background-color: #1a202c;
+  color: #fff;
+}
+
+/* Additional styling for the dark mode button if needed */
+.toggle-dark-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #3b82f6;
+  color: #fff;
+  cursor: pointer;
+}
+/* Base Styles */
+.user-1 {
+  padding: 1rem;
+}
+
+/* Header styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Light Mode Styles */
+.light-mode {
+  background-color: #fff;
+  color: #000;
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+  background-color: #1a202c; /* dark background */
+  color: #fff; /* light text color */
+}
+
+/* Ensure table elements are visible in dark mode */
+.dark-mode .user-table th,
+.dark-mode .user-table td {
+  border-color: #fff;
+}
+
+/* Button styling */
+.post-btn,
+.toggle-dark-btn,
+.edit-btn,
+.delete-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Specific styling for the dark mode toggle button */
+.toggle-dark-btn {
+  background-color: #3b82f6;
+  color: #fff;
+}
+
+.toggle-dark-btn:hover {
+  background-color: #2563eb;
+}
+
+/* Additional styling for search input and table */
+.search-input {
+  margin: 1rem 0;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user-table th,
+.user-table td {
+  border: 1px solid #ccc;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.toggle-dark-btn:hover {
+  background-color: #2563eb;
+}
+
   
   .user-table {
     width: 100%;
@@ -20,6 +117,7 @@
     overflow: hidden;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     border: 2px solid black;
+    color: black;
   }
   
   .user-table th,

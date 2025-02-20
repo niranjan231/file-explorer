@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div>
-      <FileViewer/>
+      <FileViewer />
       <Routes>
         <Route path="/filexplorer" element={<FieExplorer />} />
       </Routes>
